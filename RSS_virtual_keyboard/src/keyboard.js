@@ -1,7 +1,6 @@
 const keys = [
     {
         "id": 1,
-        "code": "Backquote",
         "key": "Backquote",
         "rusName": "]",
         "rusShift": "[",
@@ -12,7 +11,6 @@ const keys = [
     },
     {
         "id": 2,
-        "code": "Digit1",
         "key": "1",
         "rusName": "1",
         "rusShift": "!",
@@ -651,7 +649,7 @@ function setLocalStorage() {
     localStorage.setItem('lang', lang);
 }
 window.addEventListener('beforeunload', setLocalStorage)
-// getLocalStorage();
+
 window.addEventListener('load', () => {
     const textarea = document.querySelector('.textarea');
     getLocalStorage();
@@ -671,23 +669,25 @@ window.addEventListener('load', () => {
             if ( actBtn.classList.contains('Backspace') ) {
                 position = textarea.selectionStart;
                 position = deleteAfter(position)
-            } 
+            } else
             if ( actBtn.classList.contains('Backslash') ) {
                 position = textarea.selectionStart;
-                position = deleteBefore(position)
-            } 
+                deleteBefore(position)
+            } else
             if ( actBtn.classList.contains('Enter') ) {
                 position = textarea.selectionStart;
                 position = addRow(position)
-            } 
+            } else
             if ( actBtn.classList.contains('Tab') ) {
                 position = textarea.selectionStart;
                 position = addTab(position)
-            } 
+            } else
             if ( actBtn.classList.contains('CapsLock') ) {
                 changeOnCaps(actBtn);
-            } 
-            printletter(actBtn);
+            } else {
+               printletter(actBtn); 
+            }
+            
             textarea.focus()
         }); 
     }) 
@@ -742,7 +742,7 @@ window.addEventListener('load', () => {
         let shiftLeft = document.querySelector('.ShiftLeft');
         let shiftRight = document.querySelector('.ShiftRight');
         if ( key == '◄' || key == '▲' || key == '▼' || key == '►' || key == 'Del' || key == '<-' || key == 'Tab' || key == 'CapsLock' || key == 'Shift' || key == 'ControlLeft' || key == 'AltLeft' || key == 'AltRight' || key == 'MetaRight' || key == 'MetaLeft' || key == 'ArrowLeft' || key == 'ArrowUp' || key == 'ArrowRight' || key == 'ArrowDown' || key == 'Enter' ) {
-            key = '';
+            return
         }
         if ( caps.classList.contains('clicked') ) {
             key = key.toUpperCase();
@@ -756,7 +756,6 @@ window.addEventListener('load', () => {
             arr = textarea.value.split('');
             const newValue = convertArrayToList(arr);
             let listArr = addToList(newValue, position, key);
-            console.log(listArr);
             textarea.value = listArr.join('');
             textarea.selectionStart = position + 1;
         } else {
@@ -768,14 +767,9 @@ window.addEventListener('load', () => {
     function setKeydown() {
         document.addEventListener('keydown',(e) => {
                 let code = e.code;
-                // console.log(code);
-                // if ( code == 'Backspace') {
-                //     deleteAfter()
-                // }
                 if ( code == 'Backslash') {
                     deleteBefore()
                 }
-                runOnKeys(changeLang, ["ControlLeft","AltLeft"]);
                 addChars(code);
                 if ( code == 'ShiftLeft' || code == 'ShiftRight' || code == 'ControlLeft' || code == 'CapsLock') {
                     e.preventDefault();
@@ -808,7 +802,6 @@ window.addEventListener('load', () => {
                     setClickOnBtn();
                     setKeydown();
                     setKeyup();
-                    // changeOnCaps(key);
                 } 
                 keys.forEach((item) => {
                     if ( item.key == code ) {
@@ -830,7 +823,6 @@ window.addEventListener('load', () => {
         } else {
             arrChars = [];
         }
-        // console.log(arrChars);
         if ( actCode == actCode.toUpperCase() ) {
             btns.forEach((item) => {
                 if ( item.classList.contains('ShiftLeft') || item.classList.contains('ShiftRight') || item.classList.contains('CapsLock') ) {
@@ -859,32 +851,6 @@ window.addEventListener('load', () => {
                 arrChars.push(code);
             }
         }
-    }
-
-    function runOnKeys(func, ...args) {
-
-        let arrChars = [];                    // массив одновременно нажатых клавиш
-    
-        document.addEventListener("keydown", function (event) {
-            if (event.repeat) return;         // повторы не обрабатываем
-            arrChars.push(event.code);        // запоминаем код нажатой и пока еще не отпущенной клавиши
-        });
-    
-        document.addEventListener("keyup", function (event) {
-            if (arrChars.length == 0) return; // нечего обрабатывать, завершаем функцию
-    
-            let runFunc = true;
-            for (let arg of args) {           // нажаты ли одновременно отслеживаемые клавиши
-                if (!arrChars.includes(arg)) {
-                    runFunc = false;
-                    break;
-                }
-            }
-            if (runFunc) func();              // если нажаты, запускаем заданный код
-    
-            arrChars.length = 0;              // очистим массив одновременно нажатых клавиш
-        });
-    
     }
 
     function changeLang() {
@@ -933,7 +899,7 @@ window.addEventListener('load', () => {
         } else {
             textArr.splice(position-1,1);
             textarea.value = textArr.join('');
-            textarea.selectionStart = position-2;  
+            textarea.selectionStart = position;  
         }
         return position
     }
@@ -941,9 +907,18 @@ window.addEventListener('load', () => {
     function deleteBefore(pos) {
         let position = pos;
         let textArr = textarea.value.split('');
-        textArr.splice(position,1);
-        textarea.value = textArr.join('');
-        textarea.selectionStart = position-1;
+        if (position >= textArr.length) {
+            return
+        } else
+        if (pos == 0 ) {
+            textArr.shift();
+            textarea.value = textArr.join('');
+            textarea.selectionStart = 0;
+        } else {
+            textArr.splice(position,1);
+            textarea.value = textArr.join('');
+            textarea.selectionStart = position;  
+        }
         return position
     }
 
@@ -976,31 +951,6 @@ window.addEventListener('load', () => {
     
 })
 
-
-
-    // keys.forEach((item) => {
-    //     const key = `<div class="key ${item.key}">
-    //         <span class="rus">
-    //             <span class="name">${item.rusName}</span>
-    //             <span class="shift hidden">${item.rusShift}</span>
-    //             <span class="caps hidden">${item.rusCaps}</span>
-    //         </span>
-    //         <span class="eng">
-    //             <span class="name hidden">${item.engName}</span>
-    //             <span class="shift hidden">${item.engShift}</span>
-    //             <span class="caps hidden">${item.engCaps}</span>
-    //         </span>
-    //     </div>`;
-    //     keyboardBlock.insertAdjacentHTML('beforeend', key);
-    // })
-
-    // keys.forEach((item) => {
-    //     const key = `<div class="key ${item.key}">
-    //         <span class="name">${item.rusName}</span>
-    //     </div>`;
-    //     keyboardBlock.insertAdjacentHTML('beforeend', key);
-    // })
-
     class ListNode {
         constructor(x) {
            this.value = x;
@@ -1021,6 +971,7 @@ window.addEventListener('load', () => {
     }
 
     function addToList(linkedList,position,value) {
+        console.log(linkedList)
         let list = linkedList;
         let node = new ListNode(value);
         let prev = null;
