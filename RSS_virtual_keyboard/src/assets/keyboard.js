@@ -1,5 +1,4 @@
-{
-    "keys": [
+const keyboard = [
         {
             "id": 1,
             "key": "Backquote",
@@ -12,7 +11,7 @@
         },
         {
             "id": 2,
-            "key": "Digit1",
+            "key": "1",
             "rusName": "1",
             "rusShift": "!",
             "rusCaps": "!",
@@ -152,6 +151,7 @@
         },
         {
             "id": 16,
+            "code": "q",
             "key": "KeyQ",
             "rusName": "й",
             "rusShift": "Й",
@@ -282,6 +282,7 @@
         },
         {
             "id": 29,
+            "code": "a",
             "key": "KeyA",
             "rusName": "ф",
             "rusShift": "Ф",
@@ -422,6 +423,7 @@
         },
         {
             "id": 43,
+            "code": "z",
             "key": "KeyZ",
             "rusName": "я",
             "rusShift": "Я",
@@ -562,16 +564,26 @@
         },
         {
             "id": 57,
-            "key": "Space",
-            "rusName": " ",
-            "rusShift": " ",
-            "rusCaps": " ",
-            "engName": " ",
-            "engShift": " ",
-            "engCaps": " "
+            "key": "MetaLeft",
+            "rusName": "Cmd",
+            "rusShift": "Cmd",
+            "rusCaps": "Cmd",
+            "engName": "Cmd",
+            "engShift": "Cmd",
+            "engCaps": "Cmd"
         },
         {
             "id": 58,
+            "key": "Space",
+            "rusName": "&nbsp",
+            "rusShift": "&nbsp",
+            "rusCaps": "&nbsp",
+            "engName": "&nbsp",
+            "engShift": "&nbsp",
+            "engCaps": "&nbsp"
+        },
+        {
+            "id": 59,
             "key": "AltRight",
             "rusName": "Alt",
             "rusShift": "Alt",
@@ -581,7 +593,7 @@
             "engCaps": "Alt"
         },
         {
-            "id": 59,
+            "id": 60,
             "key": "ArrowLeft",
             "rusName": "&#9668;",
             "rusShift": "&#9668;",
@@ -591,7 +603,7 @@
             "engCaps": "&#9668;"
         },
         {
-            "id": 60,
+            "id": 61,
             "key": "ArrowDown",
             "rusName": "&#9660;",
             "rusShift": "&#9660;",
@@ -601,7 +613,7 @@
             "engCaps": "&#9660;"
         },
         {
-            "id": 61,
+            "id": 62,
             "key": "ArrowRight",
             "rusName": "&#9658;",
             "rusShift": "&#9658;",
@@ -611,14 +623,14 @@
             "engCaps": "&#9658;"
         },
         {
-            "id": 62,
-            "key": "ControlRight",
-            "rusName": "Ctrl",
-            "rusShift": "Ctrl",
-            "rusCaps": "Ctrl",
-            "engName": "Ctrl",
-            "engShift": "Ctrl",
-            "engCaps": "Ctrl"
+            "id": 63,
+            "key": "MetaRight",
+            "rusName": "Cmd",
+            "rusShift": "Cmd",
+            "rusCaps": "Cmd",
+            "engName": "Cmd",
+            "engShift": "Cmd",
+            "engCaps": "Cmd"
         }
     ]
-}
+    export default keyboard
