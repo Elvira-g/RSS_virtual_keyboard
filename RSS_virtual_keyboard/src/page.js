@@ -11,9 +11,4 @@ window.addEventListener('load', () => {
         </div>
     </div>`;
     body.insertAdjacentHTML('beforeend', container);
-
-//     const textareaBlock = document.querySelector('.textarea-block');
-
-// const textarea = `<textarea name="" id="" cols="30" rows="10" class="textarea"></textarea>`;
-// textareaBlock.insertAdjacentHTML('beforeend', textarea);
 })
