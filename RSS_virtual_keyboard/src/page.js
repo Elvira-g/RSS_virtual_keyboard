@@ -7,7 +7,7 @@ window.addEventListener('load', () => {
         <div class="keyboard-block"></div>
         <div class="footer">
             <p class="footer-text">Клавиатура создана в операционной системе iOS</p>
-            <p class="footer-text">Для переключения языка комбинация: левыe ctrl + space</p>
+            <p class="footer-text">Для переключения языка комбинация: левыe ctrl + alt </p>
         </div>
     </div>`;
     body.insertAdjacentHTML('beforeend', container);

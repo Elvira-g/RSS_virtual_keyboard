@@ -80,11 +80,11 @@
     border: 1px solid #4d4d4d
 }
 
-.key:hover {
+/* .key:hover {
     background-color: #eef130;
     color: #000000;
     border: 1px solid #4d4d4d 
-}
+} */
 
 .footer-text {
     margin: 40px 0 0 0;
